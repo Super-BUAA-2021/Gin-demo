@@ -22,4 +22,5 @@ func main() {
 	r := gin.New()
 	// 初始化Router
 	initialize.InitRouter(r)
+	r.Run(":8000")
 }

@@ -17,14 +17,12 @@ func Login(c *gin.Context) {
 	// var user model.User
 	// var notFound bool
 
-	// username := c.Request.FormValue("username")
-	// password := c.Request.FormValue("password")
+	username := c.Request.FormValue("username")
+	password := c.Request.FormValue("password")
 
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
 		"message": "登录成功",
-		"data":    "success",
+		"data":    "username:" + username + "password" + password,
 	})
-
-	return
 }

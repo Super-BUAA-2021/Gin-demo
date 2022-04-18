@@ -4,6 +4,7 @@ import (
 	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"net/http"
 
 	v1 "github.com/Super-BUAA-2021/Gin-demo/api/v1"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -20,6 +21,7 @@ func InitRouter(r *gin.Engine) {
 	if global.VP.GetBool("server.docs") {
 		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
+	r.GET("", HelloGin)
 	// 禁用代理访问
 	if err := r.SetTrustedProxies(nil); err != nil {
 		global.LOG.Panic("初始化失败：禁止使用代理访问失败")
@@ -32,4 +34,12 @@ func InitRouter(r *gin.Engine) {
 		// rawRouter.POST("/users", v1.CreateUser)
 	}
 
+}
+
+func HelloGin(c *gin.Context) {
+
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "HelloGin!",
+	})
 }
