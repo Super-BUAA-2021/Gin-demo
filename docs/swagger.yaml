@@ -9,7 +9,9 @@ info:
 paths:
   /user/login:
     post:
-      description: 用户登录
+      consumes:
+      - application/json
+      description: 根据用户邮箱和密码等生成token，并将token返回给用户
       parameters:
       - description: 用户名
         in: formData
@@ -21,11 +23,14 @@ paths:
         name: password
         required: true
         type: string
+      produces:
+      - application/json
       responses:
         "200":
           description: '{"success": true, "message": "登录成功", "data": "model.User的所有信息"}'
           schema:
             type: string
+      summary: 用户登录
       tags:
-      - user
+      - 登录模块
 swagger: "2.0"

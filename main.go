@@ -9,6 +9,7 @@ import (
 // @title        Demo API
 // @version      1.0
 // @description  Demo API description
+
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
@@ -16,11 +17,7 @@ func main() {
 	global.VP = initialize.InitViper()
 	global.DB = initialize.InitMySQL()
 	// 创建Router
-	if !global.VP.GetBool("server.debug") {
-		gin.SetMode(gin.ReleaseMode)
-	}
 	r := gin.New()
-	// 初始化Router
 	initialize.InitRouter(r)
-	r.Run(":8000")
+	r.Run(":8081")
 }

@@ -7,7 +7,6 @@ import (
 	"os"
 	"path/filepath"
 
-	// "github.com/phoenix-next/phoenix-server/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"

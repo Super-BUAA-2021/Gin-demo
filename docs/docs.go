@@ -29,10 +29,17 @@ var doc = `{
     "paths": {
         "/user/login": {
             "post": {
-                "description": "用户登录",
-                "tags": [
-                    "user"
+                "description": "根据用户邮箱和密码等生成token，并将token返回给用户",
+                "consumes": [
+                    "application/json"
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录模块"
+                ],
+                "summary": "用户登录",
                 "parameters": [
                     {
                         "type": "string",
