@@ -18,3 +18,5 @@ demo.yml
 .idea/
 /.idea
 *.iml
+!resource/init.go
+resource/
