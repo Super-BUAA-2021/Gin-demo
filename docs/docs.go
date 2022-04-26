@@ -76,7 +76,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "description": "组织ID，教程名称，教程简介，可读权限，可写权限",
+                        "description": "name 文件",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -131,6 +131,9 @@ const docTemplate = `{
         },
         "response.UploadFileQ": {
             "type": "object",
+            "required": [
+                "name"
+            ],
             "properties": {
                 "name": {
                     "type": "string"

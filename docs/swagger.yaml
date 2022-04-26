@@ -25,6 +25,8 @@ definitions:
     properties:
       name:
         type: string
+    required:
+    - name
     type: object
 info:
   contact: {}
@@ -68,7 +70,7 @@ paths:
         name: file
         required: true
         type: file
-      - description: 组织ID，教程名称，教程简介，可读权限，可写权限
+      - description: name 文件
         in: body
         name: data
         required: true
