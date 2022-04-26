@@ -1,4 +1,4 @@
-package model
+package database
 
 import "time"
 
@@ -8,9 +8,4 @@ type User struct {
 	Name     string    `gorm:"size:32; not null; unique;" json:"name"`
 	Password string    `gorm:"size:128; not null;" json:"password"`
 	RegTime  time.Time `gorm:"autoCreateTime" json:"regTime"`
-}
-
-type LoginQ struct {
-	Username string `json:"username" binding:"min=3,max=100,required"`
-	Password string `json:"password" binding:"gte=6,required"`
 }

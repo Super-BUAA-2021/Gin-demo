@@ -1,8 +1,7 @@
 package v1
 
 import (
-	"fmt"
-	"github.com/Super-BUAA-2021/Gin-demo/model"
+	"github.com/Super-BUAA-2021/Gin-demo/model/response"
 	"github.com/Super-BUAA-2021/Gin-demo/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -19,7 +18,7 @@ import (
 // @Router       /api/v1/login [post]
 func Login(c *gin.Context) {
 
-	var data model.LoginQ
+	var data response.LoginQ
 	if err := utils.ShouldBindAndValid(c, &data); err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"success": false,
@@ -32,24 +31,5 @@ func Login(c *gin.Context) {
 		"success": true,
 		"message": "登录成功",
 		"data":    "username:" + data.Username + ",password:" + data.Password,
-	})
-}
-
-// ShowAccount
-// @Summary      Show an account
-// @Description  get string by ID
-// @Tags         accounts
-// @Accept       json
-// @Produce      json
-// @Param        id   query  int     true  "Account ID"
-// @Success      200  {string}  string  "{"success": true, "message": "登录成功", "data": "model.User的所有信息"}"
-// @Router       /api/v1/account [post]
-func ShowAccount(c *gin.Context) {
-	id := c.Request.URL.Query().Get("id")
-	fmt.Println(id, "1")
-	c.JSON(http.StatusOK, gin.H{
-		"success": true,
-		"message": "登录成功",
-		"data":    id,
 	})
 }

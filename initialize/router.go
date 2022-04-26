@@ -30,7 +30,6 @@ func InitRouter(r *gin.Engine) {
 	rawRouter := r.Group("/api/v1")
 	{
 		rawRouter.POST("/login", v1.Login)
-		rawRouter.POST("/account", v1.ShowAccount)
 	}
 
 }

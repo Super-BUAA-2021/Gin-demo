@@ -3,7 +3,7 @@ package initialize
 import (
 	"fmt"
 	"github.com/Super-BUAA-2021/Gin-demo/global"
-	"github.com/Super-BUAA-2021/Gin-demo/model"
+	"github.com/Super-BUAA-2021/Gin-demo/model/database"
 	"os"
 	"path/filepath"
 
@@ -40,7 +40,7 @@ func InitMySQL() *gorm.DB {
 	// 更新MySQL数据库内容
 	db.Set("gorm:table_options", "ENGINE=InnoDB")
 	err = db.AutoMigrate(
-		&model.User{},
+		&database.User{},
 	)
 	if err != nil {
 		panic("初始化失败：更新MySQL数据库内容失败")
