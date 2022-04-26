@@ -20,38 +20,6 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/account": {
-            "post": {
-                "description": "get string by ID",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "accounts"
-                ],
-                "summary": "Show an account",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Account ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{\"success\": true, \"message\": \"登录成功\", \"data\": \"model.User的所有信息\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/api/v1/login": {
             "post": {
                 "description": "根据用户邮箱和密码等生成token，并将token返回给用户",
@@ -72,7 +40,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.LoginQ"
+                            "$ref": "#/definitions/response.LoginQ"
                         }
                     }
                 ],
@@ -85,16 +53,86 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/v1/resource/upload": {
+            "post": {
+                "description": "上传一个文件测试",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "其他模块"
+                ],
+                "summary": "上传文件",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "文件",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "description": "组织ID，教程名称，教程简介，可读权限，可写权限",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/response.UploadFileQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "是否成功，返回信息",
+                        "schema": {
+                            "$ref": "#/definitions/response.CommonA"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "model.LoginQ": {
+        "response.CommonA": {
             "type": "object",
             "properties": {
-                "password": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
                     "type": "string"
                 },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "response.LoginQ": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                },
                 "username": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                }
+            }
+        },
+        "response.UploadFileQ": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string"
                 }
             }

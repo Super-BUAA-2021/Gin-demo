@@ -1,9 +1,29 @@
 definitions:
-  model.LoginQ:
+  response.CommonA:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      success:
+        type: boolean
+    type: object
+  response.LoginQ:
     properties:
       password:
+        minLength: 6
         type: string
       username:
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  response.UploadFileQ:
+    properties:
+      name:
         type: string
     type: object
 info:
@@ -15,27 +35,6 @@ info:
   title: Demo API
   version: "1.0"
 paths:
-  /api/v1/account:
-    post:
-      consumes:
-      - application/json
-      description: get string by ID
-      parameters:
-      - description: Account ID
-        in: query
-        name: id
-        required: true
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: '{"success": true, "message": "登录成功", "data": "model.User的所有信息"}'
-          schema:
-            type: string
-      summary: Show an account
-      tags:
-      - accounts
   /api/v1/login:
     post:
       consumes:
@@ -47,7 +46,7 @@ paths:
         name: data
         required: true
         schema:
-          $ref: '#/definitions/model.LoginQ'
+          $ref: '#/definitions/response.LoginQ'
       produces:
       - application/json
       responses:
@@ -58,4 +57,31 @@ paths:
       summary: 用户登录
       tags:
       - 登录模块
+  /api/v1/resource/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 上传一个文件测试
+      parameters:
+      - description: 文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: 组织ID，教程名称，教程简介，可读权限，可写权限
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/response.UploadFileQ'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 是否成功，返回信息
+          schema:
+            $ref: '#/definitions/response.CommonA'
+      summary: 上传文件
+      tags:
+      - 其他模块
 swagger: "2.0"

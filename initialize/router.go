@@ -31,7 +31,11 @@ func InitRouter(r *gin.Engine) {
 	{
 		rawRouter.POST("/login", v1.Login)
 	}
-
+	// 静态资源模块
+	resourceRouter := rawRouter.Group("/resource")
+	{
+		resourceRouter.POST("/upload", v1.UploadFile)
+	}
 }
 
 func HelloGin(c *gin.Context) {

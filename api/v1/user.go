@@ -13,7 +13,7 @@ import (
 // @Tags         登录模块
 // @Accept       json
 // @Produce      json
-// @Param        data  body      model.LoginQ  true  "用户名，密码"
+// @Param        data  body      response.LoginQ  true  "用户名，密码"
 // @Success      200       {string}  string  "{"success": true, "message": "登录成功", "data": "model.User的所有信息"}"
 // @Router       /api/v1/login [post]
 func Login(c *gin.Context) {
