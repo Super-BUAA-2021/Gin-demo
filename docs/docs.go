@@ -131,9 +131,6 @@ const docTemplate = `{
         },
         "response.UploadFileQ": {
             "type": "object",
-            "required": [
-                "name"
-            ],
             "properties": {
                 "name": {
                     "type": "string"

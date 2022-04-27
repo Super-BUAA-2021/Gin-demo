@@ -20,3 +20,5 @@ demo.yml
 *.iml
 !resource/init.go
 resource/
+
+gen/

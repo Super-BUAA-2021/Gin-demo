@@ -23,12 +23,12 @@ func UploadFile(c *gin.Context) {
 	// 获取请求数据
 	var data response.UploadFileQ
 	if err := c.ShouldBind(&data); err != nil {
-		c.JSON(http.StatusOK, response.CommonA{Success: false, Message: "请求参数非法" + err.Error(), Code: 400})
+		c.JSON(http.StatusOK, response.CommonA{Success: false, Message: "请求参数非法 : " + err.Error(), Code: 400})
 		return
 	}
 	// 保存文件的其余操作
-	fmt.Println(data.Name)
 	fmt.Println(data.File.Size)
+
 	if err := c.SaveUploadedFile(data.File, filepath.Join(global.VP.GetString("root_path"), "resource", data.Name)); err != nil {
 		c.JSON(http.StatusOK, response.CommonA{Success: true, Message: "上传文件失败," + err.Error(), Code: 402})
 		return
