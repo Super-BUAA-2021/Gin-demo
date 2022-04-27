@@ -14,6 +14,7 @@ import (
 func InitRouter(r *gin.Engine) {
 	//跨域配置
 	r.Use(middleware.Cors())
+	r.Use(middleware.LoggerToFile())
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	r.GET("/hello", HelloGin)

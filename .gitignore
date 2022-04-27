@@ -22,4 +22,7 @@ demo.yml
 !resource/init.go
 resource/
 
+*.log
+
+
 gen/
