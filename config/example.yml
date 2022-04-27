@@ -3,4 +3,4 @@ database:
   port: '3306' # MySQL的端口
   user: 'username' # MySQL的用户名
   password: 'password' # MySQL对应用户的密码
-  database: 'phoenix' # 使用的MySQL数据库名称
+  database: 'dbname' # 使用的MySQL数据库名称
