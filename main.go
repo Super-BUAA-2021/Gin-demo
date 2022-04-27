@@ -11,6 +11,11 @@ import (
 // @version      1.0
 // @description  Demo API description
 
+// @contact.name   BFlameSwift
+// @contact.url    https://github.com/BFlameSwift
+// @contact.email  bflaemswift@163.com
+
+// @BasePath      /api/v1
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {

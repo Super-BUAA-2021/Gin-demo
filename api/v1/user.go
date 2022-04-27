@@ -14,8 +14,8 @@ import (
 // @Accept       json
 // @Produce      json
 // @Param        data  body      response.LoginQ  true  "用户名，密码"
-// @Success      200       {string}  string  "{"success": true, "message": "登录成功", "data": "model.User的所有信息"}"
-// @Router       /api/v1/login [post]
+// @Success      200   {string}  string           "{"success": true, "message": "登录成功", "data": "model.User的所有信息"}"
+// @Router       /login [post]
 func Login(c *gin.Context) {
 
 	var data response.LoginQ

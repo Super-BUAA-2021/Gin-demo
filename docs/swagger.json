@@ -3,15 +3,20 @@
     "info": {
         "description": "Demo API description",
         "title": "Demo API",
-        "contact": {},
+        "contact": {
+            "name": "BFlameSwift",
+            "url": "https://github.com/BFlameSwift",
+            "email": "bflaemswift@163.com"
+        },
         "license": {
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         },
         "version": "1.0"
     },
+    "basePath": "/api/v1",
     "paths": {
-        "/api/v1/login": {
+        "/login": {
             "post": {
                 "description": "根据用户邮箱和密码等生成token，并将token返回给用户",
                 "consumes": [
@@ -45,7 +50,7 @@
                 }
             }
         },
-        "/api/v1/resource/upload": {
+        "/resource/upload": {
             "post": {
                 "description": "上传一个文件测试",
                 "consumes": [

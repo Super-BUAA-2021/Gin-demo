@@ -10,7 +10,11 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "BFlameSwift",
+            "url": "https://github.com/BFlameSwift",
+            "email": "bflaemswift@163.com"
+        },
         "license": {
             "name": "Apache 2.0",
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -20,7 +24,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/login": {
+        "/login": {
             "post": {
                 "description": "根据用户邮箱和密码等生成token，并将token返回给用户",
                 "consumes": [
@@ -54,7 +58,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/resource/upload": {
+        "/resource/upload": {
             "post": {
                 "description": "上传一个文件测试",
                 "consumes": [
@@ -134,7 +138,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
-	BasePath:         "",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "Demo API",
 	Description:      "Demo API description",
