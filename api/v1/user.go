@@ -26,7 +26,6 @@ func Login(c *gin.Context) {
 		})
 		return
 	}
-	panic("123")
 	//fmt.Println(c.Request.Body,c.Params,c.Request.Form)
 	c.JSON(http.StatusOK, gin.H{
 		"success": true,
