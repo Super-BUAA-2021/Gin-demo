@@ -23,7 +23,7 @@ func main() {
 	global.VP = initialize.InitViper()
 	global.DB = initialize.InitMySQL()
 	// 创建Router
-	r := gin.New()
+	r := gin.Default()
 	router.InitRouter(r)
 	r.Run(":8081")
 }
