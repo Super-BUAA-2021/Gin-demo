@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/Super-BUAA-2021/Gin-demo/initialize"
+	"github.com/Super-BUAA-2021/Gin-demo/router"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +19,6 @@ func main() {
 	global.DB = initialize.InitMySQL()
 	// 创建Router
 	r := gin.New()
-	initialize.InitRouter(r)
+	router.InitRouter(r)
 	r.Run(":8081")
 }

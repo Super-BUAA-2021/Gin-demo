@@ -1,9 +1,8 @@
-package initialize
+package router
 
 import (
 	v1 "github.com/Super-BUAA-2021/Gin-demo/api/v1"
 	_ "github.com/Super-BUAA-2021/Gin-demo/docs"
-	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/Super-BUAA-2021/Gin-demo/middleware"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
@@ -20,7 +19,7 @@ func InitRouter(r *gin.Engine) {
 	r.GET("/hello", HelloGin)
 	// 禁用代理访问
 	if err := r.SetTrustedProxies(nil); err != nil {
-		global.LOG.Panic("初始化失败：禁止使用代理访问失败")
+		//global.LOG.Panic("初始化失败：禁止使用代理访问失败")
 	}
 
 	// 登录模块

@@ -76,13 +76,11 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "description": "name 文件",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/response.UploadFileQ"
-                        }
+                        "type": "string",
+                        "description": "name",
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -126,14 +124,6 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 100,
                     "minLength": 3
-                }
-            }
-        },
-        "response.UploadFileQ": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
                 }
             }
         }

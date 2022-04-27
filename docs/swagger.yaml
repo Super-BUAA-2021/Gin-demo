@@ -21,11 +21,6 @@ definitions:
     - password
     - username
     type: object
-  response.UploadFileQ:
-    properties:
-      name:
-        type: string
-    type: object
 info:
   contact: {}
   description: Demo API description
@@ -68,12 +63,11 @@ paths:
         name: file
         required: true
         type: file
-      - description: name 文件
-        in: body
-        name: data
+      - description: name
+        in: formData
+        name: name
         required: true
-        schema:
-          $ref: '#/definitions/response.UploadFileQ'
+        type: string
       produces:
       - application/json
       responses:

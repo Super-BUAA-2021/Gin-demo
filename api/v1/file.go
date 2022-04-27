@@ -5,6 +5,7 @@ import (
 	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/Super-BUAA-2021/Gin-demo/model/response"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	"net/http"
 	"path/filepath"
 )
@@ -16,13 +17,13 @@ import (
 // @Accept       multipart/form-data
 // @Produce      json
 // @Param        file     formData  file                   true  "文件"
-// @Param        data     body      response.UploadFileQ  true  "name 文件"
+// @Param        name     formData      string  true  "name"
 // @Success      200      {object}  response.CommonA          "是否成功，返回信息"
 // @Router       /api/v1/resource/upload [post]
 func UploadFile(c *gin.Context) {
 	// 获取请求数据
 	var data response.UploadFileQ
-	if err := c.ShouldBind(&data); err != nil {
+	if err := c.ShouldBindWith(&data, binding.FormMultipart); err != nil {
 		c.JSON(http.StatusOK, response.CommonA{Success: false, Message: "请求参数非法 : " + err.Error(), Code: 400})
 		return
 	}
@@ -33,5 +34,6 @@ func UploadFile(c *gin.Context) {
 		c.JSON(http.StatusOK, response.CommonA{Success: true, Message: "上传文件失败," + err.Error(), Code: 402})
 		return
 	}
+
 	c.JSON(http.StatusOK, response.CommonA{Success: true, Message: "上传文件成功", Code: 200})
 }
