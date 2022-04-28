@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"github.com/Super-BUAA-2021/Gin-demo/model/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,4 +19,9 @@ func ShouldBindAndValid(c *gin.Context, model interface{}) error {
 	}
 
 	return nil
+}
+
+func SolveUser(c *gin.Context) database.User {
+	userRaw, _ := c.Get("user")
+	return userRaw.(database.User)
 }
