@@ -4,3 +4,6 @@ database:
   user: 'username' # MySQL的用户名
   password: 'password' # MySQL对应用户的密码
   database: 'dbname' # 使用的MySQL数据库名称
+
+server:
+  secret: 'demo@' # JWT secret
