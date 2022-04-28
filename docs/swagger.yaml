@@ -9,18 +9,42 @@ definitions:
       success:
         type: boolean
     type: object
+  response.LoginA:
+    properties:
+      id:
+        type: integer
+      message:
+        type: string
+      success:
+        type: boolean
+      token:
+        type: string
+    type: object
   response.LoginQ:
     properties:
-      password:
-        minLength: 6
-        type: string
-      username:
+      name:
         maxLength: 100
         minLength: 3
         type: string
+      password:
+        minLength: 6
+        type: string
     required:
+    - name
     - password
-    - username
+    type: object
+  response.RegisterQ:
+    properties:
+      name:
+        maxLength: 100
+        minLength: 3
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - name
+    - password
     type: object
 info:
   contact:
@@ -50,10 +74,32 @@ paths:
       - application/json
       responses:
         "200":
-          description: '{"success": true, "message": "登录成功", "data": "model.User的所有信息"}'
+          description: 是否成功，返回信息，Token
           schema:
-            type: string
+            $ref: '#/definitions/response.LoginA'
       summary: 用户登录
+      tags:
+      - 登录模块
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: 注册新用户
+      parameters:
+      - description: 用户名，密码
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/response.RegisterQ'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 是否成功，返回信息，Token
+          schema:
+            $ref: '#/definitions/response.CommonA'
+      summary: 注册
       tags:
       - 登录模块
   /resource/upload:

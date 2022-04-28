@@ -17,7 +17,7 @@ import (
 // @Accept       json
 // @Produce      json
 // @Param        data  body      response.RegisterQ  true  "用户名，密码"
-// @Success      200   {object}  response.CommonA  "是否成功，返回信息，Token"
+// @Success      200   {object}  response.CommonA    "是否成功，返回信息，Token"
 // @Router       /register [post]
 func Register(c *gin.Context) {
 	// 获取请求数据
@@ -47,22 +47,24 @@ func Register(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Param        data  body      response.LoginQ  true  "用户名，密码"
-// @Success      200   {string}  string           "{"success": true, "message": "登录成功", "data": "model.User的所有信息"}"
+// @Success      200   {object}  response.LoginA  "是否成功，返回信息，Token"
 // @Router       /login [post]
 func Login(c *gin.Context) {
 
-	var data response.LoginQ
-	if err := utils.ShouldBindAndValid(c, &data); err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"success": false,
-			"message": "参数信息不合法" + err.Error(),
-		})
+	// 获取请求中的数据
+	data := utils.BindJsonAndValid(c, &response.LoginQ{}).(*response.LoginQ)
+	// 用于登录的邮箱未注册的情况
+	user, notFound := service.GetUserByUsername(data.Name)
+	if notFound {
+		c.JSON(http.StatusOK, response.LoginA{Success: false, Message: "登录失败，用户名不存在", Token: "", ID: 0})
 		return
 	}
-	//fmt.Println(c.Request.Body,c.Params,c.Request.Form)
-	c.JSON(http.StatusOK, gin.H{
-		"success": true,
-		"message": "登录成功",
-		"data":    "username:" + data.Name + ",password:" + data.Password,
-	})
+	// 密码错误的情况
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(data.Password)); err != nil {
+		c.JSON(http.StatusOK, response.LoginA{Success: false, Message: "登录失败，密码错误", Token: "", ID: 0})
+		return
+	}
+	// 成功返回响应
+	token := utils.GenerateToken(user.ID)
+	c.JSON(http.StatusOK, response.LoginA{Success: true, Message: "登录成功", Token: token, ID: user.ID})
 }

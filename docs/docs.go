@@ -50,9 +50,43 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\": true, \"message\": \"登录成功\", \"data\": \"model.User的所有信息\"}",
+                        "description": "是否成功，返回信息，Token",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/response.LoginA"
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "description": "注册新用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录模块"
+                ],
+                "summary": "注册",
+                "parameters": [
+                    {
+                        "description": "用户名，密码",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/response.RegisterQ"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "是否成功，返回信息，Token",
+                        "schema": {
+                            "$ref": "#/definitions/response.CommonA"
                         }
                     }
                 }
@@ -113,21 +147,56 @@ const docTemplate = `{
                 }
             }
         },
+        "response.LoginA": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
         "response.LoginQ": {
             "type": "object",
             "required": [
-                "password",
-                "username"
+                "name",
+                "password"
             ],
             "properties": {
-                "password": {
-                    "type": "string",
-                    "minLength": 6
-                },
-                "username": {
+                "name": {
                     "type": "string",
                     "maxLength": 100,
                     "minLength": 3
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                }
+            }
+        },
+        "response.RegisterQ": {
+            "type": "object",
+            "required": [
+                "name",
+                "password"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
                 }
             }
         }
