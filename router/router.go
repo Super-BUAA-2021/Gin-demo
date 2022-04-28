@@ -27,6 +27,7 @@ func InitRouter(r *gin.Engine) {
 	rawRouter := r.Group("/api/v1")
 	{
 		rawRouter.POST("/login", v1.Login)
+		rawRouter.POST("/register", v1.Register)
 	}
 	// 静态资源模块
 	resourceRouter := rawRouter.Group("/resource")
