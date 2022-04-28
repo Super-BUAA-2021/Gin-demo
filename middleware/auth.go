@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"github.com/Super-BUAA-2021/Gin-demo/service"
 	"github.com/Super-BUAA-2021/Gin-demo/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
