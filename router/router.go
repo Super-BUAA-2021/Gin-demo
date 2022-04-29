@@ -3,10 +3,13 @@ package router
 import (
 	v1 "github.com/Super-BUAA-2021/Gin-demo/api/v1"
 	_ "github.com/Super-BUAA-2021/Gin-demo/docs"
+	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/Super-BUAA-2021/Gin-demo/middleware"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"path/filepath"
+
 	//"github.com/swaggo/gin-swagger/swaggerFiles"
 	"net/http"
 )
@@ -33,6 +36,7 @@ func InitRouter(r *gin.Engine) {
 	resourceRouter := rawRouter.Group("/resource")
 	{
 		resourceRouter.POST("/upload", v1.UploadFile)
+		resourceRouter.Static("/file", filepath.Join(global.VP.GetString("root_path"), "resource"))
 	}
 }
 

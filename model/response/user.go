@@ -22,3 +22,10 @@ type LoginA struct {
 	Token   string `json:"token"`
 	ID      uint64 `json:"id"`
 }
+
+type UploadFileA struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
+	Code    int    `json:"code"`
+	Path    string `json:"path"`
+}
