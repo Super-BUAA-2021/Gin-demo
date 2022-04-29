@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
+	"strconv"
 )
 
 // Register
@@ -67,4 +68,30 @@ func Login(c *gin.Context) {
 	// 成功返回响应
 	token := utils.GenerateToken(user.ID)
 	c.JSON(http.StatusOK, response.LoginA{Success: true, Message: "登录成功", Token: token, ID: user.ID})
+}
+
+// GetUser
+// @Summary      获取用户资料
+// @Description  获取一个用户公开的详细资料
+// @Tags         用户模块
+// @Accept       json
+// @Produce      json
+// @Param        x-token  header    string             false  "token"
+// @Param        id       path      int                true   "用户ID"
+// @Success      200      {object}  response.GetUserA  "是否成功，返回信息，用户名"
+// @Router       /users/{id} [get]
+func GetUser(c *gin.Context) {
+	// 获取请求数据
+	id, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		c.JSON(http.StatusOK, response.GetUserA{Success: false, Message: "请求参数非法", Code: 400})
+		return
+	}
+	// 查询对应ID的用户
+	if user, notFound := service.GetUserByID(id); notFound {
+		c.JSON(http.StatusOK, response.GetUserA{Success: false, Message: "找不到对应的用户", Code: 404})
+	} else {
+		// 返回响应
+		c.JSON(http.StatusOK, response.GetUserA{Success: true, Message: "查找成功", Name: user.Name, Code: 200})
+	}
 }

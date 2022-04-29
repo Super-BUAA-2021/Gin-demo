@@ -38,6 +38,15 @@ func InitRouter(r *gin.Engine) {
 		resourceRouter.POST("/upload", v1.UploadFile)
 		resourceRouter.Static("/file", filepath.Join(global.VP.GetString("root_path"), "resource"))
 	}
+	// 除了登录模块和静态资源之外，都需要身份认证
+	basicRouter := rawRouter.Group("/")
+	basicRouter.Use(middleware.AuthRequired())
+
+	// 用户模块
+	userRouter := basicRouter.Group("/users")
+	{
+		userRouter.GET("/:id", v1.GetUser)
+	}
 }
 
 func HelloGin(c *gin.Context) {

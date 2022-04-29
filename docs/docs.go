@@ -125,7 +125,45 @@ const docTemplate = `{
                     "200": {
                         "description": "是否成功，返回信息",
                         "schema": {
-                            "$ref": "#/definitions/response.CommonA"
+                            "$ref": "#/definitions/response.UploadFileA"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "description": "获取一个用户公开的详细资料",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户模块"
+                ],
+                "summary": "获取用户资料",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "token",
+                        "name": "x-token",
+                        "in": "header"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "是否成功，返回信息，用户名",
+                        "schema": {
+                            "$ref": "#/definitions/response.GetUserA"
                         }
                     }
                 }
@@ -140,6 +178,23 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "message": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "response.GetUserA": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "name": {
                     "type": "string"
                 },
                 "success": {
@@ -197,6 +252,23 @@ const docTemplate = `{
                 "password": {
                     "type": "string",
                     "minLength": 6
+                }
+            }
+        },
+        "response.UploadFileA": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "success": {
+                    "type": "boolean"
                 }
             }
         }

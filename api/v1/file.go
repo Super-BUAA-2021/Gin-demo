@@ -16,8 +16,8 @@ import (
 // @Tags         其他模块
 // @Accept       multipart/form-data
 // @Produce      json
-// @Param        file  formData  file              true  "文件"
-// @Param        name  formData  string            true  "name"
+// @Param        file  formData  file                  true  "文件"
+// @Param        name  formData  string                true  "name"
 // @Success      200   {object}  response.UploadFileA  "是否成功，返回信息"
 // @Router       /resource/upload [post]
 func UploadFile(c *gin.Context) {

@@ -9,6 +9,17 @@ definitions:
       success:
         type: boolean
     type: object
+  response.GetUserA:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      name:
+        type: string
+      success:
+        type: boolean
+    type: object
   response.LoginA:
     properties:
       id:
@@ -45,6 +56,17 @@ definitions:
     required:
     - name
     - password
+    type: object
+  response.UploadFileA:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      path:
+        type: string
+      success:
+        type: boolean
     type: object
 info:
   contact:
@@ -124,8 +146,33 @@ paths:
         "200":
           description: 是否成功，返回信息
           schema:
-            $ref: '#/definitions/response.CommonA'
+            $ref: '#/definitions/response.UploadFileA'
       summary: 上传文件
       tags:
       - 其他模块
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: 获取一个用户公开的详细资料
+      parameters:
+      - description: token
+        in: header
+        name: x-token
+        type: string
+      - description: 用户ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 是否成功，返回信息，用户名
+          schema:
+            $ref: '#/definitions/response.GetUserA'
+      summary: 获取用户资料
+      tags:
+      - 用户模块
 swagger: "2.0"

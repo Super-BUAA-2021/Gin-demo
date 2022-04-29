@@ -29,3 +29,10 @@ type UploadFileA struct {
 	Code    int    `json:"code"`
 	Path    string `json:"path"`
 }
+
+type GetUserA struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
+	Code    int    `json:"code"`
+	Name    string `json:"name"`
+}
