@@ -24,6 +24,7 @@ func UploadFile(c *gin.Context) {
 	// 获取请求数据
 	var data response.UploadFileQ
 	if err := c.ShouldBindWith(&data, binding.FormMultipart); err != nil {
+		// 若要绑定多种参数，需要ShouldBindWith https://gin-gonic.com/zh-cn/docs/examples/bind-body-into-dirrerent-structs/
 		c.JSON(http.StatusOK, response.UploadFileA{Success: false, Message: "请求参数非法 : " + err.Error(), Code: 400})
 		return
 	}
