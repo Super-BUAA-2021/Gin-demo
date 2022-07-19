@@ -1,9 +1,8 @@
 package main
 
 import (
-	"github.com/Super-BUAA-2021/Gin-demo/global"
-	"github.com/Super-BUAA-2021/Gin-demo/initialize"
 	"github.com/Super-BUAA-2021/Gin-demo/router"
+	"github.com/Super-BUAA-2021/Gin-demo/storage"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,8 +19,7 @@ import (
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
 	// 初始化全局资源
-	global.VP = initialize.InitViper()
-	global.DB = initialize.InitMySQL()
+	storage.Setup()
 	// 创建Router
 	r := gin.Default()
 	router.InitRouter(r)

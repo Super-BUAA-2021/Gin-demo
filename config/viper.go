@@ -1,4 +1,4 @@
-package initialize
+package config
 
 import (
 	"fmt"
