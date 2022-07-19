@@ -9,13 +9,18 @@ import (
 
 // GenerateToken 生成一个token
 func GenerateToken(id uint64) (signedToken string) {
+	expiresAt, err := strconv.ParseInt(global.VP.GetString("jwt.timeout"), 10, 64)
+	if err != nil {
+		panic("GenerateToken: Parse Timeout error")
+	}
 	claims := jwt.StandardClaims{
-		Issuer:   "demo-server",
-		Audience: strconv.FormatUint(id, 10),
+		Issuer:    "demo-server",
+		ExpiresAt: expiresAt,
+		Audience:  strconv.FormatUint(id, 10),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	secret := global.VP.GetString("server.secret")
-	signedToken, err := token.SignedString([]byte(secret))
+	secret := global.VP.GetString("jwt.secret")
+	signedToken, err = token.SignedString([]byte(secret))
 	if err != nil {
 		panic("GenerateToken: sign token error")
 	}
@@ -24,7 +29,7 @@ func GenerateToken(id uint64) (signedToken string) {
 
 // ParseToken 验证token的正确性，正确则返回id
 func ParseToken(signedToken string) (id uint64, err error) {
-	secret := global.VP.GetString("server.secret")
+	secret := global.VP.GetString("jwt.secret")
 	token, err := jwt.Parse(
 		signedToken,
 		func(token *jwt.Token) (interface{}, error) {
