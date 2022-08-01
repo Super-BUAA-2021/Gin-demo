@@ -5,17 +5,18 @@ import (
 	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/golang-jwt/jwt"
 	"strconv"
+	"time"
 )
 
 // GenerateToken 生成一个token
 func GenerateToken(id uint64) (signedToken string) {
-	expiresAt, err := strconv.ParseInt(global.VP.GetString("jwt.timeout"), 10, 64)
+	expiresSeconds, err := strconv.ParseInt(global.VP.GetString("jwt.timeout"), 10, 64)
 	if err != nil {
 		panic("GenerateToken: Parse Timeout error")
 	}
 	claims := jwt.StandardClaims{
 		Issuer:    "demo-server",
-		ExpiresAt: expiresAt,
+		ExpiresAt: expiresSeconds + time.Now().Unix(),
 		Audience:  strconv.FormatUint(id, 10),
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
