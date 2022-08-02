@@ -28,3 +28,5 @@ resource/
 gen/
 
 Gin-demo*
+.air.toml
+tmp/
