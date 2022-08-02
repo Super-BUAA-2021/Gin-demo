@@ -14,4 +14,4 @@ jobs:
 
       - name: pull and build
 #         sudo apt-get install coreutils 安装nohub，从而后台运行项目
-        run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} " sudo apt-get install coreutils; cd /opt/Project/Gin-demo;  git config --global http.postBuffer 1048576000; git pull; go mod tidy; go build ./; nohup ./Gin-demo &; ps -ef | grep Gin-demo"
+        run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "sudo apt-get install coreutils; cd /opt/Project/Gin-demo;  git config --global http.postBuffer 1048576000; git pull; go mod tidy; go build ./; nohup ./Gin-demo &; ps -ef | grep Gin-demo"
