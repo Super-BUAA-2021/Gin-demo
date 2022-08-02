@@ -5,3 +5,5 @@
 # 启动 build 后的可执行文件
 ./Gin-demo &
 # 启动 gin 开发服务器
+
+ps -ef | grep Gin-demo
