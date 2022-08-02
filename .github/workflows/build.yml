@@ -17,8 +17,8 @@ jobs:
 
       - name: build
         run: |
-          cd ~/Project/Gin-demo;  
-          python ~/Project/Gin-demo/scripts/kill.py; 
+          cd /root/Project/Gin-demo;  
+          python ./scripts/kill.py; 
           git config --global http.postBuffer 1048576000;
           git pull; 
           go build .;
