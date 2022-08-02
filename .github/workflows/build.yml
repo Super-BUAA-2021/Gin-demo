@@ -18,6 +18,5 @@ jobs:
         # run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo;python ./scripts/kill.py  git config --global http.postBuffer 1048576000; git pull;   go mod tidy;   ps -ef | grep Gin-demo; ls ./scripts/; go build .; nohup ./Gin-demo &"
 
         run: |
-          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; python ./scripts/kill.py"
-          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; git config --global http.postBuffer 1048576000;git pull;   make dep;   ps -ef | grep Gin-demo; ls ./scripts/; nohup make build_and_run &"
+          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; make kill; git config --global http.postBuffer 1048576000;git pull;   make dep;   ps -ef | grep Gin-demo; ls ./scripts/; nohup make build_and_run &"
         # run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo;  git config --global http.postBuffer 1048576000; git pull; go mod tidy; go build ./; nohup ./Gin-demo &; ps -ef | grep Gin-demo"

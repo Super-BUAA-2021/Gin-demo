@@ -1,8 +1,12 @@
 BINARY_NAME=Gin-demo
 GO=/usr/local/go/bin/go
+PYTHON=/root/anaconda3/bin/python
 
 build:
 	GOARCH=amd64 GOOS=linux ${GO} build -o ${BINARY_NAME}-linux main.go
+
+kill:
+	${PYTHON} ./script/kill.py
 
 run:
 	./${BINARY_NAME}-linux
