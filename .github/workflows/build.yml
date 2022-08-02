@@ -12,5 +12,5 @@ jobs:
       - name: setup
         run: sudo apt install sshpass
 
-      - name: pull and reload
-        run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no ${{secrets.USER}}@${{secrets.IP}} "cd /opt/Projects/Gin-demo ;  python ./scripts/kill.py; git config --global http.postBuffer 1048576000; git pull; go build .; ./Gin-demo &;"
+      - name: pull and build
+        run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no ${{secrets.USER}}@${{secrets.IP}} "cd /opt/Projects/Gin-demo;  python ./scripts/kill.py; git config --global http.postBuffer 1048576000; git pull; go build .; ./Gin-demo &;"
