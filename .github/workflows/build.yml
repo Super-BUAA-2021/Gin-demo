@@ -13,6 +13,8 @@ jobs:
         run: sudo apt install sshpass
 
       - name: pull and build
-
-#         sudo apt-get install coreutils 安装nohub，从而后台运行项目
-        run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "sudo apt-get install coreutils; cd /opt/Project/Gin-demo;  git config --global http.postBuffer 1048576000; git pull; go mod tidy; go build ./; nohup ./Gin-demo &; ps -ef | grep Gin-demo"
+        env:
+          GO: /usr/local/go/bin/go
+        # run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo;python ./scripts/kill.py  git config --global http.postBuffer 1048576000; git pull;   go mod tidy;   ps -ef | grep Gin-demo; ls ./scripts/; go build .; nohup ./Gin-demo &"
+        run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo;python ./scripts/kill.py  git config --global http.postBuffer 1048576000;git pull;   make dep;   ps -ef | grep Gin-demo; ls ./scripts/; nohup make build_and_run &"
+        # run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo;  git config --global http.postBuffer 1048576000; git pull; go mod tidy; go build ./; nohup ./Gin-demo &; ps -ef | grep Gin-demo"
