@@ -16,7 +16,7 @@ jobs:
         run: sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no ${{secrets.USER}}@${{secrets.IP}}
 
       - name: build
-        working-directory: /opt/Project
+        working-directory: ~/Project
         run: |
           cd ./Gin-demo;  python ./scripts/kill.py; git config --global http.postBuffer 1048576000;
           git pull; go build .; ./Gin-demo &;
