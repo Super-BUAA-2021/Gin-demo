@@ -14,4 +14,11 @@ jobs:
 
       - name: pull
         run: |
-          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; git config --global http.postBuffer 1048576000;git pull"
+          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; git config --global http.postBuffer 1048576000;git pull; "
+      - name: query backend status
+        env:
+#          go build得到的文件名
+          PROJ_NAME: main
+        run: |
+#          查询后端进程的存在情况
+          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "ps -ef | grep ${PROJ_NAME}"
