@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/Super-BUAA-2021/Gin-demo/global"
 	"github.com/Super-BUAA-2021/Gin-demo/router"
 	"github.com/Super-BUAA-2021/Gin-demo/storage"
 	"github.com/gin-gonic/gin"
@@ -23,5 +24,5 @@ func main() {
 	// 创建Router
 	r := gin.Default()
 	router.InitRouter(r)
-	r.Run(":8081")
+	r.Run(":" + global.VP.GetString("server.backend_port"))
 }

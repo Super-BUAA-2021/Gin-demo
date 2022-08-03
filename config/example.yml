@@ -12,4 +12,6 @@ jwt:
   timeout: 3600
 
 server:
+  ip: '127.0.0.1' # 服务器的IP地址
+  backend_port: 8081 # 后端运行端口
   backend_url: 'http://127.0.0.1:8081/api/v1'

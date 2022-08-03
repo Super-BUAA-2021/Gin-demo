@@ -19,7 +19,6 @@ func InitMySQL() *gorm.DB {
 		panic("初始化失败：可执行程序路径获取失败")
 	}
 	path = filepath.Dir(path)
-	path = filepath.Join(path, "phoenix-mysql.log")
 	// 读取配置数据
 	addr := global.VP.GetString("database.ip")
 	port := global.VP.GetString("database.port")
