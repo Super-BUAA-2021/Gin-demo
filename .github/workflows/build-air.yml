@@ -17,9 +17,9 @@ jobs:
           sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; git config --global http.postBuffer 1048576000;git pull"
 
       - name: query_backend_status
+#        查看后端运行情况
         env:
 #          go build得到的文件名
-          PROJ_NAME: "main"
+          PROJ_NAME: main
         run: |
-#          查询后端进程的存在情况
-          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "ps -ef | grep ${PROJ_NAME}"
+          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "ps -ef | grep main"
