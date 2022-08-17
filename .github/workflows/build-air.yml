@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
@@ -14,12 +14,18 @@ jobs:
 
       - name: pull
         run: |
-          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Gin-demo; git config --global http.postBuffer 1048576000;git pull"
+          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Personal-Tools; git config --global http.postBuffer 1048576000;git pull"
+
+      - name: dependencies
+        # make dep 结合 makefile 使用
+        run: |
+          sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "cd /opt/Project/Personal-Tools; make dep"
+
 
       - name: query_backend_status
-#        查看后端运行情况
+        #        查看后端运行情况
         env:
-#          go build得到的文件名
+          #          go build得到的文件名
           PROJ_NAME: main
         run: |
           sshpass -p ${{secrets.PASSWORD}} ssh -o StrictHostKeyChecking=no root@${{secrets.IP}} "ps -ef | grep ${PROJ_NAME}"
