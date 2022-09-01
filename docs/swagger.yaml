@@ -70,7 +70,7 @@ definitions:
     type: object
 info:
   contact:
-    email: bflaemswift@163.com
+    email: bflameswift@163.com
     name: BFlameSwift
     url: https://github.com/BFlameSwift
   description: Demo API description

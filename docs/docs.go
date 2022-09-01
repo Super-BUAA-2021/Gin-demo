@@ -13,7 +13,7 @@ const docTemplate = `{
         "contact": {
             "name": "BFlameSwift",
             "url": "https://github.com/BFlameSwift",
-            "email": "bflaemswift@163.com"
+            "email": "bflameswift@163.com"
         },
         "license": {
             "name": "Apache 2.0",
